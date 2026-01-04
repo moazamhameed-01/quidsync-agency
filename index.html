@@ -3,86 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuidSync | Industrial-Grade Business Automation</title>
+    <title>QuidSync | Autonomous Business Architecture</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    colors: {
+                        void: '#020617',
+                        glass: 'rgba(255, 255, 255, 0.03)',
+                        'glass-border': 'rgba(255, 255, 255, 0.08)',
+                        neon: '#3b82f6',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body { font-family: 'Space Grotesk', sans-serif; background: #020617; color: #fff; overflow-x: hidden; }
-        .bg-grid { background-image: radial-gradient(circle, #1e293b 1px, transparent 1px); background-size: 40px 40px; }
-        .glass-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glass-card:hover { border-color: #3b82f6; transform: translateY(-8px); box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.4); }
-        .text-gradient { background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 600px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); z-index: -1; }
+        /* Custom Industrial Effects */
+        body { background-color: #020617; color: #e2e8f0; }
+        
+        .bg-grid-animate {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, 10%, white, 90%, transparent);
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 60%);
+        }
+
+        /* Scanline Effect for "High Tech" Feel */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(59, 130, 246, 0.04) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
     </style>
 </head>
-<body class="bg-grid">
-    <div class="hero-glow"></div>
+<body class="overflow-x-hidden selection:bg-neon selection:text-white">
 
-    <nav class="fixed top-8 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50">
-        <div class="glass-card rounded-3xl px-10 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-2 text-white">
-                <span class="text-2xl font-black tracking-tighter uppercase italic">QuidSync</span>
+    <div class="fixed inset-0 z-[-1] pointer-events-none">
+        <div class="absolute inset-0 bg-grid-pattern bg-grid-animate opacity-[0.07]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-void via-transparent to-void"></div>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 top-0 border-b border-white/5 bg-void/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="h-2 w-2 bg-neon rounded-full animate-pulse"></div>
+                <span class="font-mono font-bold text-xl tracking-tighter uppercase text-white">QuidSync <span class="text-gray-600 text-xs align-top">V3.0</span></span>
             </div>
-            <div class="flex gap-8 items-center">
-                <span class="hidden md:block text-[10px] font-bold text-blue-500 uppercase tracking-[0.3em]">Status: System Online</span>
-                <a href="#contact" class="px-6 py-2 bg-white text-black text-xs font-bold rounded-full uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Request Access</a>
+            
+            <div class="hidden md:flex gap-8 text-xs font-mono uppercase tracking-[0.2em] text-gray-400">
+                <a href="#protocol" class="hover:text-neon transition-colors">Protocol</a>
+                <a href="#systems" class="hover:text-neon transition-colors">Systems</a>
+                <a href="#intel" class="hover:text-neon transition-colors">Intelligence</a>
             </div>
+
+            <a href="#deploy" class="group relative px-6 py-2 bg-white/5 border border-white/10 overflow-hidden rounded-sm transition-all hover:border-neon/50">
+                <div class="absolute inset-0 w-0 bg-neon transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+                <span class="relative font-mono text-xs font-bold uppercase tracking-widest text-white group-hover:text-neon">Initialize</span>
+            </a>
         </div>
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center px-6 md:px-24">
-        <div class="max-w-5xl">
-            <div class="inline-block px-4 py-1 mb-8 border-l-2 border-blue-600 bg-blue-600/10 text-blue-400 text-[10px] font-bold uppercase tracking-[0.4em]">
-                Advanced Automation Architecture
+    <main class="relative pt-32 pb-20 px-6">
+        <div class="hero-gradient absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] z-[-1]"></div>
+        <div class="scanline pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 mb-8 border border-neon/20 bg-neon/5 rounded-full">
+                    <span class="text-[10px] font-mono font-bold text-neon uppercase tracking-widest">System Status: Operational</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-8 text-white">
+                    WE ENGINEER <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon to-purple-500">AUTONOMY.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg md:text-xl font-light leading-relaxed max-w-xl mb-10">
+                    Stop renting human time. QuidSync builds proprietary automation infrastructure that scales revenue, filters leads, and recovers profit while you sleep.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-4">
+                    <a href="#deploy" class="px-8 py-4 bg-neon text-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-blue-600 transition-all text-center">
+                        Deploy Infrastructure
+                    </a>
+                    <a href="#systems" class="px-8 py-4 border border-white/10 text-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all text-center">
+                        View Schematics
+                    </a>
+                </div>
             </div>
-            <h1 class="text-6xl md:text-[140px] font-black mb-10 tracking-tighter leading-[0.85] uppercase">
-                We Buy Back <br> <span class="text-gradient">Your Time.</span>
-            </h1>
-            <p class="text-gray-500 max-w-2xl text-xl md:text-2xl mb-12 font-light leading-relaxed">
-                QuidSync doesn't "help" businesses. We engineer autonomous clones of your best operations so you can exit the manual grind.
+
+            <div class="hidden lg:block relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-neon to-purple-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative glass-panel rounded-lg p-6 font-mono text-xs text-gray-300 leading-6 border border-white/10">
+                    <div class="flex items-center gap-2 mb-4 border-b border-white/5 pb-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        <span class="ml-2 text-gray-600">revenue_engine.js</span>
+                    </div>
+                    <p><span class="text-purple-400">const</span> <span class="text-blue-400">initRecovery</span> = <span class="text-purple-400">async</span> (cart) => {</p>
+                    <p class="pl-4"><span class="text-gray-500">// Deploy AI Agent to recover lost sale</span></p>
+                    <p class="pl-4"><span class="text-purple-400">if</span> (cart.status === <span class="text-green-400">'abandoned'</span>) {</p>
+                    <p class="pl-8"><span class="text-purple-400">await</span> Agent.contact({</p>
+                    <p class="pl-12">channel: <span class="text-green-400">'whatsapp'</span>,</p>
+                    <p class="pl-12">logic: <span class="text-green-400">'persuasive_v2'</span>,</p>
+                    <p class="pl-12">discount: <span class="text-orange-400">false</span> <span class="text-gray-600">// Protect margins</span></p>
+                    <p class="pl-8">});</p>
+                    <p class="pl-4">}</p>
+                    <p class="pl-4"><span class="text-purple-400">return</span> <span class="text-green-400">'REVENUE_CAPTURED'</span>;</p>
+                    <p>}</p>
+                    <div class="mt-4 pt-4 border-t border-white/5 text-neon animate-pulse">
+                        > System Active...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="protocol" class="py-32 border-t border-white/5 bg-black/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-[0.4em] mb-16">The Operating Protocol</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group relative p-8 border border-white/5 hover:border-neon/30 transition-all duration-500 bg-void">
+                    <div class="absolute top-0 right-0 p-4 text-4xl font-mono font-bold text-white/5 group-hover:text-neon/10">01</div>
+                    <div class="w-12 h-12 mb-6 bg-blue-900/20 rounded flex items-center justify-center text-neon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Audit & Architect</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We map your manual inefficiencies. If a human is clicking the same button twice a day, it’s a leak. We plug it.</p>
+                </div>
+
+                <div class="group relative p-8 border border-white/5 hover:border-neon/30 transition-all duration-500 bg-void">
+                    <div class="absolute top-0 right-0 p-4 text-4xl font-mono font-bold text-white/5 group-hover:text-neon/10">02</div>
+                    <div class="w-12 h-12 mb-6 bg-purple-900/20 rounded flex items-center justify-center text-purple-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Inject Logic</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We deploy bespoke workflows (n8n + Gemini) that mimic your best employee, running 24/7 without fatigue.</p>
+                </div>
+
+                <div class="group relative p-8 border border-white/5 hover:border-neon/30 transition-all duration-500 bg-void">
+                    <div class="absolute top-0 right-0 p-4 text-4xl font-mono font-bold text-white/5 group-hover:text-neon/10">03</div>
+                    <div class="w-12 h-12 mb-6 bg-green-900/20 rounded flex items-center justify-center text-green-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Scale Output</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">The system runs itself. You focus on strategy while QuidSync handles the execution, filtration, and recovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="systems" class="py-32 relative overflow-hidden">
+        <div class="absolute right-0 top-1/4 w-1/2 h-1/2 bg-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+                <div>
+                    <h2 class="text-[10px] font-mono font-bold text-neon uppercase tracking-[0.4em] mb-4">Live Architecture</h2>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white tracking-tight">PROPRIETARY SYSTEMS</h3>
+                </div>
+                <div class="text-right">
+                    <p class="text-gray-500 text-sm font-mono uppercase tracking-widest">Efficiency Status: <span class="text-white">Optimized</span></p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 mb-24 items-center group">
+                <div class="md:col-span-7 glass-panel rounded-lg p-1 border-l-4 border-l-neon overflow-hidden relative">
+                    <div class="absolute inset-0 bg-neon/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="bg-void h-64 md:h-80 w-full flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://i.ibb.co/wzn25hP/grid.png')] opacity-20"></div>
+                        <div class="z-10 text-center">
+                             <div class="text-6xl mb-4 opacity-20">🛡️</div>
+                             <div class="font-mono text-xs text-neon uppercase tracking-widest">System Visualizer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-5 md:pl-8">
+                    <div class="font-mono text-neon text-xs mb-2 uppercase tracking-widest">Classification: Lead Filtration</div>
+                    <h4 class="text-3xl font-bold text-white mb-6">The Lead Guard</h4>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        A defense layer for your CRM. Using Gemini AI, this system autonomously interviews, scores, and validates every incoming lead. It discards time-wasters and fast-tracks high-value prospects directly to your sales team.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-neon rounded-full"></span> Stops 100% of spam submissions
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-neon rounded-full"></span> Enriches data via Google Maps API
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-neon rounded-full"></span> Instant qualification scoring
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 items-center group">
+                <div class="md:col-span-5 md:pr-8 order-2 md:order-1">
+                    <div class="font-mono text-purple-400 text-xs mb-2 uppercase tracking-widest">Classification: Revenue Recovery</div>
+                    <h4 class="text-3xl font-bold text-white mb-6">RRE-DEV Engine</h4>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        The silence killer of churn. This multi-stage engine detects failed payments and abandoned carts instantly. It deploys personalized, logic-driven communication sequences to recover funds without human intervention.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> <span class="text-white font-bold">35%</span> Avg. Recovery Rate
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Multi-channel (Email, SMS, WhatsApp)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Zero human maintenance required
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:col-span-7 glass-panel rounded-lg p-1 border-l-4 border-l-purple-500 overflow-hidden relative order-1 md:order-2">
+                    <div class="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                     <div class="bg-void h-64 md:h-80 w-full flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://i.ibb.co/wzn25hP/grid.png')] opacity-20"></div>
+                        <div class="z-10 text-center">
+                             <div class="text-6xl mb-4 opacity-20">♻️</div>
+                             <div class="font-mono text-xs text-purple-400 uppercase tracking-widest">System Visualizer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="deploy" class="py-32 border-t border-white/5 bg-void relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-6xl md:text-9xl font-bold text-white tracking-tighter mb-8">
+                SCALE OR <span class="text-gray-800">STAGNATE.</span>
+            </h2>
+            <p class="text-xl text-gray-400 mb-12 font-light">
+                We are currently vetting partners for Q1 2026. <br>
+                High-volume businesses only.
             </p>
-            <div class="flex flex-wrap gap-6">
-                <a href="#contact" class="px-12 py-6 bg-blue-600 text-white font-bold rounded-sm hover:translate-y-[-4px] transition-all uppercase tracking-widest text-xs">Deploy Automation</a>
-                <div class="flex items-center gap-4 px-8 py-6 border border-white/10 rounded-sm">
-                    <span class="text-blue-500 font-bold tracking-widest text-xs uppercase">Est. ROI: 400% +</span>
-                </div>
-            </div>
-        </div>
-    </section>
+            
+            <a href="mailto:growth@quidsync.com" class="inline-block px-12 py-6 bg-white text-black font-mono font-bold text-sm uppercase tracking-[0.2em] hover:bg-neon hover:text-white transition-all transform hover:-translate-y-1">
+                Initiate Contact
+            </a>
 
-    <section id="projects" class="max-w-7xl mx-auto py-32 px-6">
-        <h2 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.5em] mb-16 text-center">Proprietary Systems</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-            <div class="glass-card p-12 rounded-sm border-l-4 border-l-blue-600">
-                <h3 class="text-3xl font-black mb-4 uppercase italic tracking-tighter">The Lead Guard</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-8">An industrial-grade filtration engine. It scores, validates, and cleans leads in real-time. If they aren't ready to buy, they never reach your team.</p>
-                <div class="flex gap-4">
-                    <span class="text-[10px] px-3 py-1 bg-white/5 rounded text-gray-400 uppercase">n8n</span>
-                    <span class="text-[10px] px-3 py-1 bg-white/5 rounded text-gray-400 uppercase">Gemini AI</span>
+            <div class="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono uppercase tracking-widest">
+                <div>© 2026 QuidSync Systems</div>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <span>Pakistan HQ</span>
+                    <span>Global Remote</span>
+                    <span class="text-neon">System: Online</span>
                 </div>
-            </div>
-            <div class="glass-card p-12 rounded-sm border-l-4 border-l-purple-600">
-                <h3 class="text-3xl font-black mb-4 uppercase italic tracking-tighter">RRE-DEV Engine</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-8">Revenue Recovery Engineering. We deploy autonomous agents to capture failed payments and churned users at the point of loss.</p>
-                <div class="flex gap-4">
-                    <span class="text-[10px] px-3 py-1 bg-white/5 rounded text-gray-400 uppercase">Profit Maximization</span>
-                    <span class="text-[10px] px-3 py-1 bg-white/5 rounded text-gray-400 uppercase">Live</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="py-32 border-t border-white/5 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center">
-            <div class="text-left">
-                <h2 class="text-4xl font-bold mb-4 uppercase tracking-tighter italic text-gradient">Scale or Stagnate.</h2>
-                <p class="text-gray-600 text-sm max-w-xs">Limited to 2 new partners for Q1 2026.</p>
-            </div>
-            <div class="text-right">
-                <span class="text-[10px] text-gray-500 uppercase tracking-[0.5em] block mb-2">Direct Contact</span>
-                <a href="mailto:growth@quidsync.com" class="text-3xl font-bold text-white hover:text-blue-500 transition-all">growth@quidsync.com</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar Blur Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-2xl', 'bg-void/90');
+                nav.classList.remove('bg-void/80');
+            } else {
+                nav.classList.remove('shadow-2xl', 'bg-void/90');
+                nav.classList.add('bg-void/80');
+            }
+        });
+    </script>
 </body>
 </html>
